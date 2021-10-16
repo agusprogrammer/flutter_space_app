@@ -6,13 +6,13 @@ class ArticlesList extends StatelessWidget {
   const ArticlesList({Key? key, required this.articlesL}) : super(key: key);
 
   final List<Article> articlesL;
-
+  
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: new BoxDecoration(color: Color.fromRGBO(220, 220, 220, 1.0)),
       child: ListView.builder(
-      // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,),
       itemCount: articlesL.length,
       itemBuilder: (context, index) {
         // return Text(articlesL[index].title);
@@ -20,7 +20,7 @@ class ArticlesList extends StatelessWidget {
       },
     ),
     );
-   
+    
   }
 }
 

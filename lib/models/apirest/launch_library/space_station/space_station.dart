@@ -2,6 +2,7 @@
 
 import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_st_active_expedition.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_st_owner.dart';
+import 'package:http/http.dart';
 
 class SpaceStation{
   

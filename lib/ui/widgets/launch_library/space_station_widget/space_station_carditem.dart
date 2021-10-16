@@ -27,7 +27,7 @@ class SpaceStationCardItem extends StatelessWidget{
                 Ink(
                   height: 240,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(20.0)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
                     image: DecorationImage(
                       image: NetworkImage(this.spaceStationItem.imageUrl),
                       fit: BoxFit.cover,

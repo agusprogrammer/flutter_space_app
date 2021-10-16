@@ -7,13 +7,31 @@ import 'package:http/http.dart';
 
 class BlogService {
 
-  final int _numResults = 10;
+  late Response _resp;
+  late List<Blog> listBlogs = [];
+  late bool errorResponseBool = true; 
 
-  Future <List<Blog>>fetchGetBlogsLimit(Client client) async {
+  Future <List<Blog>>fetchGetBlogsLimit(Client client, int _numResults) async {
     
-    final response = await client.get(Uri.parse('https://api.spaceflightnewsapi.net/v3/blogs?_limit=$_numResults'));
-    
-    return compute(parseBlogs, response.body);
+    try{
+      
+      final response = await client.get(Uri.parse('https://api.spaceflightnewsapi.net/v3/blogs?_limit=$_numResults'));
+      _resp = response;
+      errorResponseBool = false;
+
+    } catch (e) {
+
+      Response responseCatch = new Response('', 404, reasonPhrase: 'Data not found, check your internet conection.');
+      _resp = responseCatch;
+      listBlogs = parseBlogs(_resp.body);
+
+    }
+
+    if(errorResponseBool == false) {
+      listBlogs = parseBlogs(_resp.body);
+    }
+
+    return listBlogs; 
   }
 
   List<Blog> parseBlogs(String responseBody) {
@@ -21,5 +39,8 @@ class BlogService {
     return parsed.map<Blog>((json) => Blog.fromJson(json)).toList();
   }
   
-
+  Response obtainResponse() {
+    return _resp;
+  }
+  
 }

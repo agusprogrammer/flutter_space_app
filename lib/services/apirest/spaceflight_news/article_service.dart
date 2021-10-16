@@ -8,26 +8,36 @@ import 'package:http/http.dart';
 class ArticleService {
 
   // static const API ='https://api.spaceflightnewsapi.net/v3/articles?';
-  final int _numResults = 10;
   // late Future <List<Article>> artList;
+
+  late Response _resp;
+  late List<Article> listArticles = [];
+  late bool errorResponseBool = true;
   
-  Future <List<Article>> fetchGetArticlesLimit(Client client) async {
+  Future <List<Article>> fetchGetArticlesLimit(Client client, int _numResults) async {
 
-    final response = await client.get(Uri.parse('https://api.spaceflightnewsapi.net/v3/articles?_limit=$_numResults'));
+    try{
 
-
-    /*
-    if(response.statusCode == 200) {
+      final response = await client.get(Uri.parse('https://api.spaceflightnewsapi.net/v3/articles?_limit=$_numResults'));
+      _resp = response;
+      errorResponseBool = false;
       
-      // return Article.fromJson(jsonDecode(response.body));
-      artList = parseArticles(response.body) as Future<List<Article>>;
+      // return parseArticles(response.body);
 
-    } else {
-      throw Exception('Failed to load');
+    }catch(e){
+
+      Response responseCatch = new Response('', 404, reasonPhrase: 'Data not found, check your internet conection.');
+      _resp = responseCatch;
+      listArticles = parseArticles(_resp.body);
+
     }
-    */
 
-    return compute(parseArticles, response.body);
+    if(errorResponseBool == false) {
+      listArticles = parseArticles(_resp.body);
+    }
+
+    return listArticles;
+    // return compute(parseArticles, response.body); (para html)
 
   }
 
@@ -35,6 +45,10 @@ class ArticleService {
   List<Article> parseArticles(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Article>((json) => Article.fromJson(json)).toList();
+  }
+
+  Response obtainResponse() {
+    return _resp;
   }
 
 }

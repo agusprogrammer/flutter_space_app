@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/spaceflight_news/blog/blog.dart';
+import 'package:flutter_space_app/ui/widgets/graphic_components/navigation_url_button_sp_app.dart';
 
 class BlogCardItem extends StatelessWidget{
 
@@ -30,7 +31,7 @@ class BlogCardItem extends StatelessWidget{
                 Ink(
                   height: 240,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(20.0)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
                     image: DecorationImage(
                       image: NetworkImage(this.blogItem.imageUrl),
                       fit: BoxFit.cover,
@@ -54,6 +55,8 @@ class BlogCardItem extends StatelessWidget{
                 ),
 
                 Text('Published at: ' + this.blogItem.publishedAt, style: TextStyle(color: Colors.grey, fontSize: 15)),
+
+                NavigationUrlButton('More', this.blogItem.url)
               ],
             ),
           )

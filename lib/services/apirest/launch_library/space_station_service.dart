@@ -11,9 +11,33 @@ class SpaceStationService {
   
   // final int _numResults = 10;
 
+  late Response _resp;
+  late List<SpaceStation> spaceStationList;
+  late bool errorResponseBool = true; 
+
   Future <List<SpaceStation>> fetchGetSpaceStationList(Client client, int _numResults) async {
-    final response = await client.get(Uri.parse('https://ll.thespacedevs.com/2.2.0/spacestation/?limit=$_numResults'));
-    return compute(parseSpaceStations, response);
+    
+    try{
+      
+      final response = await client.get(Uri.parse('https://ll.thespacedevs.com/2.2.0/spacestation/?limit=$_numResults'));
+      _resp = response;
+      errorResponseBool = false;
+
+    }catch(e){
+      
+      Response responseCatch = new Response('', 404, reasonPhrase: 'Data not found, check your internet conection.');
+      _resp = responseCatch;
+
+    }
+
+    if(errorResponseBool == false){
+      if(_resp.statusCode >= 200 && _resp.statusCode < 300) {
+        spaceStationList = parseSpaceStations(_resp);
+      }
+    }
+    
+    return spaceStationList;
+    // return compute(parseSpaceStations, response);
   }
 
   /*
@@ -31,6 +55,8 @@ class SpaceStationService {
     // return returnData['results'];
 
     List<SpaceStation> _listSpaceStation = [];
+
+    _resp = response;
 
     final json = "[" + response.body + "]";
     List<dynamic> data = jsonDecode(json);
@@ -52,7 +78,7 @@ class SpaceStationService {
         listDynOwners.forEach((elementOwner) { 
 
           SpaceStOwner spaceStOwner = new SpaceStOwner(
-            id: int.parse(elementOwner['id']), 
+            id: int.parse(elementOwner['id'].toString()), 
             url: elementOwner['url'].toString(), 
             name: elementOwner['name'].toString(), 
             abbrev: elementOwner['abbrev'].toString()
@@ -68,7 +94,7 @@ class SpaceStationService {
         listDynExpd.forEach((elementExpd) { 
 
           SpaceStActiveExpedition spaceStActExped = new SpaceStActiveExpedition(
-            id: int.parse(elementExpd['id']),
+            id: int.parse(elementExpd['id'].toString()),
             url: elementExpd['url'].toString(),
             name: elementExpd['name'].toString(),
             start: elementExpd['start'].toString(),
@@ -80,12 +106,12 @@ class SpaceStationService {
         });        
 
         SpaceStation spaceStation = new SpaceStation(
-          id: int.parse(elementResult['id']),
+          id: int.parse(elementResult['id'].toString()),
           url: elementResult['url'].toString(), 
           name: elementResult['name'].toString(),
-          idStatus: int.parse(statusMap['id']),
+          idStatus: int.parse(statusMap['id'].toString()),
           status: statusMap['name'].toString(),
-          idType: int.parse(typeMap['id']),
+          idType: int.parse(typeMap['id'].toString()),
           type: typeMap['name'].toString(),
           founded: elementResult['founded'].toString(),
           deorbited: elementResult['deorbited'].toString(),
@@ -105,9 +131,9 @@ class SpaceStationService {
     return _listSpaceStation;
   }
 
-  
-  
-
+  Response obtainResponse() {
+    return _resp;
+  }
 
 }
 

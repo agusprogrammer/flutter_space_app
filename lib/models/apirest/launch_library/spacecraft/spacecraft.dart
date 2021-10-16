@@ -1,4 +1,6 @@
 
+import 'package:http/http.dart';
+
 class Spacecraft {
   final int id;
   final String url;
@@ -6,14 +8,12 @@ class Spacecraft {
   final String serialNumber;
   final String status;
   final String description;
-  final String spcConfUrl;
   final String spcConfName;
   final String spcConfType;
   final String agencyName;
   final String agencyType;
   final String inUse;
   final String imageUrl;
-
-  Spacecraft(this.id, this.url, this.name, this.serialNumber, this.status, this.description, this.spcConfUrl, this.spcConfName, this.spcConfType, this.agencyName, this.agencyType, this.inUse, this.imageUrl);
+  const Spacecraft({required this.id,required this.url,required this.name,required this.serialNumber,required this.status,required this.description,required this.spcConfName,required this.spcConfType,required this.agencyName,required this.agencyType,required this.inUse,required this.imageUrl});
 }
 

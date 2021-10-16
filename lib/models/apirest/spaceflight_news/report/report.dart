@@ -1,4 +1,6 @@
 
+import 'package:http/http.dart';
+
 class Report {
 
   final int id;
@@ -17,7 +19,7 @@ class Report {
       required this.imageUrl,
       required this.newsSite,
       required this.summary,
-      required this.publishedAt
+      required this.publishedAt,
     }
   );
 

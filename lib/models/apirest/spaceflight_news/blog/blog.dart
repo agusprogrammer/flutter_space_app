@@ -1,4 +1,6 @@
 
+import 'package:http/http.dart';
+
 class Blog{
 
   final int id;
@@ -22,7 +24,7 @@ class Blog{
       required this.summary,
       required this.publishedAt,
       required this.launches,
-      required this.events
+      required this.events,
     }
   );
 

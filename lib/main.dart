@@ -1,10 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_space_app/services/apirest/spaceflight_news/article_service.dart';
-import 'package:flutter_space_app/ui/pages/home/home.dart';
-import 'package:flutter_space_app/ui/pages/info/info.dart';
-import 'package:flutter_space_app/ui/pages/launch/launch.dart';
-import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft.dart';
+import 'package:flutter_space_app/ui/pages/home/home_details/home_article_page.dart';
+import 'package:flutter_space_app/ui/pages/home/home_details/home_event_page.dart';
+import 'package:flutter_space_app/ui/pages/home/home_details/home_report_page.dart';
+import 'package:flutter_space_app/ui/pages/home/home_page.dart';
+import 'package:flutter_space_app/ui/pages/info/info_page.dart';
+import 'package:flutter_space_app/ui/pages/launch/launch_page.dart';
+import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft_page.dart';
 import 'package:get_it/get_it.dart';
 
 
@@ -27,7 +30,24 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(primarySwatch: Colors.indigo),
 
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
+
+      theme: ThemeData(
+        primaryColor: Color.fromRGBO(0, 0, 204, 1.0),
+      ),
+
+      
+      // initialRoute: '/',
+      /*
+      routes: {
+        // '/' : (context) => MainPage(),
+        '/home_article' : (context) => HomeArticlePage(),
+        '/home_report' : (context) => HomeReportPage(),
+        '/home_event' : (context) => HomeEventPage()
+      },
+      */
+      
       home: MainPage(),
+
     );
   }
 }
@@ -42,13 +62,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
 
-  final Home _home = new Home();
-  final Launch _launch = new Launch();
-  final Spacecraft _spacecraft = new Spacecraft();
+  final HomePage _home = new HomePage();
+  final LaunchPage _launch = new LaunchPage();
+  final SpacecraftPage _spacecraft = new SpacecraftPage();
   final Info _info = new Info();
 
   int _page = 0;
-  Widget _showPage = new Home();
+  Widget _showPage = new HomePage();
 
   Widget? _pageChooser(int page){
     switch (page) {

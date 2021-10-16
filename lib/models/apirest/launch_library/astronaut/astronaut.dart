@@ -1,5 +1,7 @@
 
 
+import 'package:http/http.dart';
+
 class Astronaut {
   
   final int id;
@@ -18,7 +20,11 @@ class Astronaut {
   final String lastFlight;
   final String firstFlight;
 
-  Astronaut(this.id, this.url, this.name, this.status, this.type, this.agency, this.dateOfBirth, this.dateOfDeath, this.nationality, this.wiki, this.bio, this.profileImage, this.profileImageThumbnail, this.lastFlight, this.firstFlight);
+  const Astronaut({required this.id, required this.url, required this.name, 
+  required this.status, required this.type, required this.agency, 
+  required this.dateOfBirth, required this.dateOfDeath, required this.nationality, 
+  required this.wiki, required this.bio, required this.profileImage, 
+  required this.profileImageThumbnail, required this.lastFlight, required this.firstFlight});
 
   
 }

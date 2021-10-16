@@ -1,4 +1,6 @@
 
+import 'package:http/http.dart';
+
 class Article {
   final int id;
   // late bool featured;
@@ -13,7 +15,6 @@ class Article {
   final List<dynamic> launches;
   final List<dynamic> events;
 
-
   const Article(
     {
       required this.id, 
@@ -25,7 +26,7 @@ class Article {
       required this.publishedAt,
       required this.updatedAt, 
       required this.launches,
-      required this.events
+      required this.events,
     }
   );
 

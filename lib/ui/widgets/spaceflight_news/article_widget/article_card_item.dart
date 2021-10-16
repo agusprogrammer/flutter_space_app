@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/spaceflight_news/article/article.dart';
+import 'package:flutter_space_app/ui/widgets/graphic_components/navigation_url_button_sp_app.dart';
 
 class ArticleCardItem extends StatelessWidget{
 
@@ -23,17 +24,19 @@ class ArticleCardItem extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 
+                /*
                 Ink(
                   height: 240,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(20.0)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
                     image: DecorationImage(
                       image: NetworkImage(this.articleItem.imageUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-
+                */
+                
                 /*
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
@@ -71,7 +74,9 @@ class ArticleCardItem extends StatelessWidget{
                 ),
 
                 Text('Published at: ' + this.articleItem.publishedAt, style: TextStyle(color: Colors.grey, fontSize: 15)),
-                Text('Updated at:    ' + this.articleItem.updatedAt, style: TextStyle(color: Colors.grey, fontSize: 15))
+                Text('Updated at:   ' + this.articleItem.updatedAt, style: TextStyle(color: Colors.grey, fontSize: 15)),
+
+                NavigationUrlButton('More', this.articleItem.url)
               ],
             ),
           )

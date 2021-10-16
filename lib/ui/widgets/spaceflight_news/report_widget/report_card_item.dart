@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/spaceflight_news/report/report.dart';
+import 'package:flutter_space_app/ui/widgets/graphic_components/navigation_url_button_sp_app.dart';
 
 class ReportCardItem extends StatelessWidget{
 
@@ -25,7 +26,7 @@ class ReportCardItem extends StatelessWidget{
                 Ink(
                   height: 240,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(20.0)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
                     image: DecorationImage(
                       image: NetworkImage(this.reportItem.imageUrl),
                       fit: BoxFit.cover,
@@ -50,6 +51,8 @@ class ReportCardItem extends StatelessWidget{
 
                 Text('Published at: ' + this.reportItem.publishedAt, style: TextStyle(color: Colors.grey, fontSize: 15)),
 
+                NavigationUrlButton('More', this.reportItem.url)
+                
               ]
             )
             )
