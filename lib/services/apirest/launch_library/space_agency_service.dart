@@ -48,6 +48,11 @@ class  SpaceAgencyService {
       Map obj = element;
       List<dynamic> listObj = obj['results'];
 
+      String nextResultsStr = obj['next'].toString();
+      String previousResultsStr = obj['previous'].toString();
+      
+      if(nextResultsStr == null){ nextResultsStr = ''; }
+      if(previousResultsStr == null){ previousResultsStr = ''; }
 
       listObj.forEach((elementResult) { 
 
@@ -65,7 +70,10 @@ class  SpaceAgencyService {
           launchers: elementResult['launchers'].toString(), 
           spacecraft: elementResult['spacecraft'].toString(), 
           parent: elementResult['parent'].toString(), 
-          imageURL: elementResult['image_url'].toString()
+          imageURL: elementResult['image_url'].toString(),
+
+          nextResults: nextResultsStr,
+          previousResults: previousResultsStr
         );
 
         _listSpaceAgency.add(spaceAgency);

@@ -50,6 +50,12 @@ class LauncherService {
       Map obj = element;
       List<dynamic> listObj = obj['results'];
 
+      String nextResultsStr = obj['next'].toString();
+      String previousResultsStr = obj['previous'].toString();
+      
+      if(nextResultsStr == null){ nextResultsStr = ''; }
+      if(previousResultsStr == null){ previousResultsStr = ''; }
+
       listObj.forEach((elementResult) { 
 
         Map launchConf = elementResult['launcher_config'];
@@ -72,7 +78,10 @@ class LauncherService {
           imageUrl: elementResult['image_url'].toString(), 
           flights: elementResult['flights'].toString(), 
           lastLaunchDate: elementResult['last_launch_date'].toString(), 
-          firstLaunchDate: elementResult['first_launch_date'].toString()
+          firstLaunchDate: elementResult['first_launch_date'].toString(),
+
+          nextResults: nextResultsStr,
+          previousResults: previousResultsStr
         );
 
         _launcherList.add(launcher);

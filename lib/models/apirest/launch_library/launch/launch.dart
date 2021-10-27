@@ -43,6 +43,9 @@ class Launch {
   final String image;
   final String infographic;
 
+  final String nextResults;
+  final String previousResults;
+
   const Launch({
     required this.id, required this.url, required this.slug, required this.name, required this.statusId, 
     required this.statusName, required this.statusAbbrev, required this.statusDescription, 
@@ -53,7 +56,8 @@ class Launch {
     required this.rocketName, required this.rocketFamily, required this.rocketFullName, required this.rocketVariant, 
     required this.missionName, required this.missionDescription, required this.missionLaunchDesignator, 
     required this.missionType, required this.missionOrbitName, required this.missionOrbitAbbrev, 
-    required this.padLocationName, required this.image, required this.infographic
+    required this.padLocationName, required this.image, required this.infographic,
+    required this.nextResults, required this.previousResults
   });
 
 }

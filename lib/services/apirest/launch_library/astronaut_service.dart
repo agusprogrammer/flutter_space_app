@@ -48,6 +48,12 @@ class AstronautService {
       Map obj = element;
       List<dynamic> listObj = obj['results'];
 
+      String nextResultsStr = obj['next'].toString();
+      String previousResultsStr = obj['previous'].toString();
+
+      if(nextResultsStr == null){ nextResultsStr = ''; }
+      if(previousResultsStr == null){ previousResultsStr = ''; }
+
       listObj.forEach((elementResult) { 
 
         Map statusMap = elementResult['status'];
@@ -70,6 +76,8 @@ class AstronautService {
           status: statusMap['name'].toString(), 
           type: typeMap['type'].toString(),
           wiki: elementResult['wiki'].toString(),
+          nextResults: nextResultsStr,
+          previousResults: previousResultsStr
         );
 
         _listAstronaut.add(astronaut);

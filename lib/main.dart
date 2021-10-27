@@ -8,17 +8,39 @@ import 'package:flutter_space_app/ui/pages/home/home_page.dart';
 import 'package:flutter_space_app/ui/pages/info/info_page.dart';
 import 'package:flutter_space_app/ui/pages/launch/launch_page.dart';
 import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft_page.dart';
-import 'package:get_it/get_it.dart';
+// import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'models/hive_database/launch_library/launch/launch_hive.dart';
 
-void main() {
-  setupLocatorServices();
+import 'globals.Dart' as globals;
+
+void main() async {
+  // setupLocatorServices();
+
+  // WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(LaunchHiveAdapter());
+
+  bool boxOpened = false;
+  boxOpened = Hive.isBoxOpen('launch_hive_box');
+
+  if(boxOpened == false){
+    await Hive.openBox<LaunchHive>('launch_hive_box');
+    
+  }
+  
   runApp(MyApp());
 }
 
+/*
 void setupLocatorServices() {
   GetIt.instance.registerLazySingleton(() => ArticleService());
 }
+*/
 
 class MyApp extends StatelessWidget {
 
@@ -121,4 +143,5 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
     );
   }
+
 }

@@ -66,6 +66,12 @@ class SpaceStationService {
       // print(obj['next'].toString());
       List<dynamic> listObj = obj['results'];
 
+      String nextResultsStr = obj['next'].toString();
+      String previousResultsStr = obj['previous'].toString();
+      
+      if(nextResultsStr == null){ nextResultsStr = ''; }
+      if(previousResultsStr == null){ previousResultsStr = ''; }
+
       listObj.forEach((elementResult) { 
         // print(elementResult['name'].toString());
 
@@ -119,7 +125,10 @@ class SpaceStationService {
           orbit: elementResult['orbit'].toString(),
           owners: listOwners,
           expeditions: listExped,
-          imageUrl: elementResult['image_url'].toString()
+          imageUrl: elementResult['image_url'].toString(),
+
+          nextResults: nextResultsStr,
+          previousResults: previousResultsStr
         );
 
         _listSpaceStation.add(spaceStation);

@@ -16,7 +16,7 @@ class InfoAstronautPage extends StatelessWidget {
         title: const Text('Astronauts'),
       ),
       body: FutureBuilder<List<Astronaut>>(
-        future: astronautService.fetchGetAstronautList(http.Client(), 2),
+        future: astronautService.fetchGetAstronautList(http.Client(), 3),
         builder: (context, snapshot){
         if (snapshot.hasError) {
           return Center(

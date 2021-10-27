@@ -18,6 +18,9 @@ class SpaceAgency {
   final String parent;
   final String imageURL;
 
+  final String nextResults;
+  final String previousResults;
+
   const SpaceAgency({
     required this.id, 
     required this.url, 
@@ -33,6 +36,8 @@ class SpaceAgency {
     required this.spacecraft, 
     required this.parent, 
     required this.imageURL,
+    required this.nextResults,
+    required this.previousResults
   });
     
 

@@ -21,6 +21,9 @@ class SpaceStation{
   final List<SpaceStActiveExpedition> expeditions;
   final String imageUrl;
 
+  final String nextResults;
+  final String previousResults;
+
   const SpaceStation( 
     {
       required this.id,
@@ -36,7 +39,9 @@ class SpaceStation{
       required this.orbit,
       required this.owners,
       required this.expeditions,
-      required this.imageUrl
+      required this.imageUrl,
+      required this.nextResults,
+      required this.previousResults
     }
   );
   

@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 class LaunchService {
   
   late Response _resp;
-  late List<Launch> listLaunch;
+  late List<Launch> totalListLaunch;
   late bool errorResponseBool = true;
 
   Future <List<Launch>> fetchGetLaunchList(Client client, int _numResults) async {
@@ -27,16 +27,49 @@ class LaunchService {
 
     if(errorResponseBool == false){
       if(_resp.statusCode >= 200 && _resp.statusCode < 300) {
-        listLaunch = parseLaunchList(_resp);
+        totalListLaunch = parseLaunchList(_resp);
       }
     }
     
-    return listLaunch;
+    return totalListLaunch;
     // return compute(parseLaunchList, response);
   }
 
+  /* metodo sin usar --
+  Future <List<Launch>> fetchGetLaunchListNextResults(Client client, String _nextResults) async {
+    
+    late List<Launch> _listLaunch = [];
+    Response _response = new Response('', 404);
+
+    try{
+
+      _response = await client.get(Uri.parse(_nextResults));
+      errorResponseBool = false;
+
+    }catch(e){
+      errorResponseBool = true;
+    }
+
+    if(errorResponseBool == false){
+      
+      if(_response.statusCode >= 200 && _response.statusCode < 300) {
+        // _listLaunch = parseLaunchList(_response);
+        _listLaunch.addAll(parseLaunchList(_response));
+        totalListLaunch.addAll(_listLaunch);
+      }
+
+      return totalListLaunch;
+    
+    } else {
+      return _listLaunch;
+    }
+
+  }
+  */
+
   List<Launch> parseLaunchList(Response response){
     List<Launch> _listLaunch = [];
+    _listLaunch.clear();
 
     _resp = response;
 
@@ -47,6 +80,14 @@ class LaunchService {
 
       Map obj = element;
       List<dynamic> listObj = obj['results'];
+
+      String nextResultsStr = obj['next'].toString();
+        String previousResultsStr = obj['previous'].toString();
+
+        if(nextResultsStr == null){ nextResultsStr = ''; }
+
+        if(previousResultsStr == null){ previousResultsStr = ''; 
+      }
 
       listObj.forEach((elementResult) { 
 
@@ -102,7 +143,10 @@ class LaunchService {
           padLocationName: locationPadMap['name'].toString(), 
 
           image: elementResult['image'].toString(), 
-          infographic: elementResult['infographic'].toString()
+          infographic: elementResult['infographic'].toString(),
+
+          nextResults: nextResultsStr,
+          previousResults: previousResultsStr
         );
         
         _listLaunch.add(launch);

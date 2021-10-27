@@ -14,6 +14,15 @@ class Spacecraft {
   final String agencyType;
   final String inUse;
   final String imageUrl;
-  const Spacecraft({required this.id,required this.url,required this.name,required this.serialNumber,required this.status,required this.description,required this.spcConfName,required this.spcConfType,required this.agencyName,required this.agencyType,required this.inUse,required this.imageUrl});
+
+  final String nextResults;
+  final String previousResults;
+
+  const Spacecraft({required this.id,required this.url,required this.name,
+  required this.serialNumber,required this.status,required this.description,
+  required this.spcConfName,required this.spcConfType,required this.agencyName,
+  required this.agencyType,required this.inUse,required this.imageUrl,
+  required this.nextResults, required this.previousResults});
+
 }
 
