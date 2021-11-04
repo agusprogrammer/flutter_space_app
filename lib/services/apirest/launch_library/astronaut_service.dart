@@ -74,7 +74,7 @@ class AstronautService {
           profileImage: elementResult['profile_image'].toString(), 
           profileImageThumbnail: elementResult['profile_image_thumbnail'].toString(), 
           status: statusMap['name'].toString(), 
-          type: typeMap['type'].toString(),
+          type: typeMap['name'].toString(),
           wiki: elementResult['wiki'].toString(),
           nextResults: nextResultsStr,
           previousResults: previousResultsStr

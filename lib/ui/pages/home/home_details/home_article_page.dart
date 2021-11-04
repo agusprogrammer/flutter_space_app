@@ -18,7 +18,7 @@ class HomeArticlePage extends StatelessWidget {
       body: 
       
         FutureBuilder<List<Article>>(
-        future: artServ.fetchGetArticlesLimit(http.Client(), 5),
+        future: artServ.fetchGetArticlesLimit(http.Client(), 50),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(

@@ -74,7 +74,7 @@ class SpacecraftService {
           
           spcConfName: spacecraftConfigMap['name'].toString(), 
           
-          spcConfType: spacecrConfMapType['type'].toString(), 
+          spcConfType: spacecrConfMapType['name'].toString(), 
           
           agencyName: agencyMap['name'].toString(), 
           agencyType: agencyMap['type'].toString(), 

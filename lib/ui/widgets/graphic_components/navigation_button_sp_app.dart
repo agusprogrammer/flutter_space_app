@@ -4,7 +4,7 @@ import 'package:flutter_space_app/ui/pages/home/home_details/home_event_page.dar
 import 'package:flutter_space_app/ui/pages/home/home_details/home_report_page.dart';
 import 'package:flutter_space_app/ui/pages/info/info_deatils/info_astronaut_page.dart';
 import 'package:flutter_space_app/ui/pages/info/info_deatils/info_space_agency_page.dart';
-import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft_details/spacecraft_details.dart';
+import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft_details/spacecraft_page.dart';
 
 class NavigationButtonSpApp extends StatefulWidget {
 
@@ -55,7 +55,7 @@ class _NavigationButtonSpAppState extends State<NavigationButtonSpApp> {
             } 
             break;
             case 'spacecraft': {
-              Navigator.push(context, new MaterialPageRoute(builder: (context) => new SpacecraftDeatilsPage())); 
+              Navigator.push(context, new MaterialPageRoute(builder: (context) => new SpacecraftPage())); 
             }
             break;
             case 'astronaut': {

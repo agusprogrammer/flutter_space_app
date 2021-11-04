@@ -5,6 +5,9 @@ import 'package:flutter_space_app/ui/widgets/graphic_components/card_error_statu
 import 'package:flutter_space_app/ui/widgets/launch_library/event_widget/event_list.dart';
 import 'package:http/http.dart' as http;
 
+import '/globals.Dart' as globals;
+
+
 class HomeEventPage extends StatelessWidget {
   
   EventService eventService = new EventService();
@@ -16,17 +19,23 @@ class HomeEventPage extends StatelessWidget {
         title: const Text('Events'),
       ),
       body: FutureBuilder<List<Event>>(
-      future: eventService.fetchGetEventList(http.Client(), 2),
+      future: eventService.fetchGetEventList(http.Client(), 30),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(
+          
+          if(globals.hiveShowHtmlErrorsBool == true){
+            return Center(
             child: CardErrorStatusSpApp(
               eventService.obtainResponse().statusCode.toString(),
               eventService.obtainResponse().reasonPhrase.toString()
-            )
-          );
+            ));
+          } else {
+            late List<Event> eventList = [];
+            return EventList(eventL: eventList,saveData: false);
+          }
+
         } else if (snapshot.hasData) {
-          return EventList(eventL: snapshot.data!);
+          return EventList(eventL: snapshot.data!,saveData: true);
         } else {
           return const Center(
             child: CircularProgressIndicator(),

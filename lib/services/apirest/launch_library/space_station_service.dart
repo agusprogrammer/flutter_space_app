@@ -78,6 +78,7 @@ class SpaceStationService {
         Map statusMap = elementResult['status'];
         Map typeMap = elementResult['type'];
 
+        /*
         List<dynamic> listDynOwners = elementResult['owners'];
         List<SpaceStOwner> listOwners = [];
 
@@ -109,7 +110,8 @@ class SpaceStationService {
 
           listExped.add(spaceStActExped);
 
-        });        
+        });  
+        */      
 
         SpaceStation spaceStation = new SpaceStation(
           id: int.parse(elementResult['id'].toString()),
@@ -123,8 +125,8 @@ class SpaceStationService {
           deorbited: elementResult['deorbited'].toString(),
           description: elementResult['description'].toString(),
           orbit: elementResult['orbit'].toString(),
-          owners: listOwners,
-          expeditions: listExped,
+          // owners: listOwners,
+          // expeditions: listExped,
           imageUrl: elementResult['image_url'].toString(),
 
           nextResults: nextResultsStr,

@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_space_app/models/hive_database/launch_library/spacecraft/spacecraft_hive.dart';
 import 'package:flutter_space_app/services/apirest/spaceflight_news/article_service.dart';
 import 'package:flutter_space_app/ui/pages/home/home_details/home_article_page.dart';
 import 'package:flutter_space_app/ui/pages/home/home_details/home_event_page.dart';
@@ -7,40 +8,45 @@ import 'package:flutter_space_app/ui/pages/home/home_details/home_report_page.da
 import 'package:flutter_space_app/ui/pages/home/home_page.dart';
 import 'package:flutter_space_app/ui/pages/info/info_page.dart';
 import 'package:flutter_space_app/ui/pages/launch/launch_page.dart';
-import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft_page.dart';
+import 'package:flutter_space_app/ui/pages/spacecraft/launcher_page.dart';
 // import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'models/hive_database/launch_library/astronaut/astronaut_hive.dart';
+import 'models/hive_database/launch_library/event/event_hive.dart';
 import 'models/hive_database/launch_library/launch/launch_hive.dart';
-
-import 'globals.Dart' as globals;
+import 'models/hive_database/launch_library/launcher/launcher_hive.dart';
+import 'models/hive_database/launch_library/space_agency/space_agency_hive.dart';
+import 'models/hive_database/launch_library/space_station/space_station_hive.dart';
 
 void main() async {
-  // setupLocatorServices();
-
-  // WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
   Hive.registerAdapter(LaunchHiveAdapter());
+  Hive.registerAdapter(AstronautHiveAdapter());
+  Hive.registerAdapter(EventHiveAdapter());
+  Hive.registerAdapter(LauncherHiveAdapter());
+  Hive.registerAdapter(SpaceAgencyHiveAdapter());
+  Hive.registerAdapter(SpaceStationHiveAdapter());
+  Hive.registerAdapter(SpacecraftHiveAdapter());
 
-  bool boxOpened = false;
-  boxOpened = Hive.isBoxOpen('launch_hive_box');
+  // bool boxOpened = false;
+  // boxOpened = Hive.isBoxOpen('launch_hive_box');
 
-  if(boxOpened == false){
+  // if(boxOpened == false){
     await Hive.openBox<LaunchHive>('launch_hive_box');
-    
-  }
+    await Hive.openBox<AstronautHive>('astronaut_hive_box');
+    await Hive.openBox<EventHive>('event_hive_box');
+    await Hive.openBox<LauncherHive>('launcher_hive_box');
+    await Hive.openBox<SpaceAgencyHive>('space_agency_hive_box');
+    await Hive.openBox<SpaceStationHive>('space_station_hive_box');
+    await Hive.openBox<SpacecraftHive>('spacecraft_hive_box');
+  // }
   
   runApp(MyApp());
 }
-
-/*
-void setupLocatorServices() {
-  GetIt.instance.registerLazySingleton(() => ArticleService());
-}
-*/
 
 class MyApp extends StatelessWidget {
 
@@ -56,18 +62,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color.fromRGBO(0, 0, 204, 1.0),
       ),
-
-      
-      // initialRoute: '/',
-      /*
-      routes: {
-        // '/' : (context) => MainPage(),
-        '/home_article' : (context) => HomeArticlePage(),
-        '/home_report' : (context) => HomeReportPage(),
-        '/home_event' : (context) => HomeEventPage()
-      },
-      */
-      
       home: MainPage(),
 
     );
@@ -75,8 +69,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  // MyHomePage({Key? key, required this.title}) : super(key: key);
-  // final String title;
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -86,7 +78,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   final HomePage _home = new HomePage();
   final LaunchPage _launch = new LaunchPage();
-  final SpacecraftPage _spacecraft = new SpacecraftPage();
+  final LaunchersPage _spacecraft = new LaunchersPage();
   final Info _info = new Info();
 
   int _page = 0;
@@ -108,17 +100,8 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* appBar: AppBar(
-        title: Text(widget.title),
-      ), */
       body: Center(
         child: _showPage,
-
-        /*
-        child: Column(
-           children: <Widget>[],
-        ),*/
-
       ),
       bottomNavigationBar: CurvedNavigationBar(
         color: Color.fromRGBO(0, 0, 204, 1.0),
@@ -142,6 +125,12 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
       ),
 
     );
+  }
+
+   @override
+  void dispose() {
+    super.dispose();
+    Hive.close(); // close all boxes
   }
 
 }

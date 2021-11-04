@@ -17,8 +17,8 @@ class SpaceStation{
   final String deorbited;
   final String description;
   final String orbit;
-  final List<SpaceStOwner> owners;
-  final List<SpaceStActiveExpedition> expeditions;
+  // final List<SpaceStOwner> owners;
+  // final List<SpaceStActiveExpedition> expeditions;
   final String imageUrl;
 
   final String nextResults;
@@ -37,8 +37,8 @@ class SpaceStation{
       required this.deorbited,
       required this.description,
       required this.orbit,
-      required this.owners,
-      required this.expeditions,
+      // required this.owners,
+      // required this.expeditions,
       required this.imageUrl,
       required this.nextResults,
       required this.previousResults

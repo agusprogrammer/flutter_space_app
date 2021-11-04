@@ -22,10 +22,8 @@ class LaunchPage extends StatefulWidget{
 
 class _LaunchPageState extends State<LaunchPage> {
   
-  
   LaunchService launchService = new LaunchService();
   Future<List<Launch>>? futureListLaunches;
-  List<Launch> listLaunchesAdd = [];
   bool firstResults = true;
   
   @override
@@ -33,50 +31,29 @@ class _LaunchPageState extends State<LaunchPage> {
     super.initState();
 
     if(firstResults == true){
-      
-      // delayRequest();
+
       fetchFirstResults();
-      // futureListLaunches = obtainResultsFromDb();
-
       firstResults = false;
-
     }
 
-  }
-
-  
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-
-    // addResultsDB();
-  }
-
-  // borrar si eso
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Launch>>(
-      // future: launchService.fetchGetLaunchList(http.Client(), 3),
       future: futureListLaunches,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
 
-          if(globals.hiveStrorageBool == true){
-            late List<Launch> launchL = [];
-            return LaunchList(launchL: launchL, saveData: false);
-
-          } else {
+          if(globals.hiveShowHtmlErrorsBool == true){
             return Center( child: CardErrorStatusSpApp(
               launchService.obtainResponse().statusCode.toString(),
               launchService.obtainResponse().reasonPhrase.toString()
             ));
+
+          } else {
+            late List<Launch> launchL = [];
+            return LaunchList(launchL: launchL, saveData: false);
           }
           
         } else if (snapshot.hasData) {
@@ -90,86 +67,7 @@ class _LaunchPageState extends State<LaunchPage> {
 
   // obtain the first results
   fetchFirstResults() {
-    futureListLaunches = launchService.fetchGetLaunchList(http.Client(), 3);
-    
-    /*
-    futureListLaunches!.then((listValue) {
-      listLaunchesAdd = listValue;
-    });
-    */
-    
+    futureListLaunches = launchService.fetchGetLaunchList(http.Client(), 30);
   }
-
-  /*
-  Future<void> _getIntNextHourSharedRequest() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    nextHour = 0;
-    
-    if(_prefs.getInt('nexthour') == null) {
-      nextHour = 0;
-    } else {
-      nextHour = _prefs.getInt('nexthour')!;
-    }
-
-    // return nextHour;
-
-  }
-
-  Future<void> _updateNextHourSharedRequest(int nextHour) async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    await _prefs.setInt('nexthour', nextHour);
-  }
-
-  Future<void> _resetNextHourSharedRequest() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    await _prefs.setInt('nexthour', 0);
-  }
-  */
-
-  // method for dealy the requests and avoid the http error 429 Too many requests
-  /*
-  Future<void> delayRequest() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int _nextHour = 0;
-
-    // delete all shared prefs
-    //_prefs.clear();
-
-    // comprobar y extaer
-    
-    if(_prefs.getInt('nexthour') == null) {
-      _nextHour = 0;
-    } else {
-      _nextHour = _prefs.getInt('nexthour')!;
-    }
-    
-    // _getIntNextHourSharedRequest();
-    // _nextHour = nextHour;
-
-    // var nowDate = new DateTime.now();
-    int miliseconds = DateTime.now().millisecondsSinceEpoch;
-    double doubleHours = 0;
-    int hoursNow = 0; 
-
-    doubleHours = (((miliseconds / 1000)/60)/60);
-    hoursNow = doubleHours.truncate();
-
-    // fetchFirstResults();
-
-    if(hoursNow > _nextHour){
-      int _nextFutureHour = 0;
-      
-      _nextFutureHour = hoursNow + 5; // increment the number of hours
-      
-      await _prefs.setInt('nexthour', _nextFutureHour); // update preference
-
-      fetchFirstResults(); // fetch new results
-      
-    } else {
-      // obtainResultsFromDb(); // save on list future
-    }
-
-  }
-  */
 
 }

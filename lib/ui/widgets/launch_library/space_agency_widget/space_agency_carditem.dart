@@ -37,32 +37,32 @@ class SpaceAgencyCardItem extends StatelessWidget {
 
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spaceAgencyItem.foundingYear, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                  child: Text('Founding: ' + this.spaceAgencyItem.foundingYear, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
                 
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spaceAgencyItem.type, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                  child: Text('Type: ' + this.spaceAgencyItem.type, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
 
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spaceAgencyItem.abbrev, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                  child: Text('Abbrev: ' + this.spaceAgencyItem.abbrev, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
 
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spaceAgencyItem.countryCode, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                  child: Text('Country code: ' + this.spaceAgencyItem.countryCode, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
 
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spaceAgencyItem.launchers, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                  child: Text('Launchers: ' + this.spaceAgencyItem.launchers, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
 
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spaceAgencyItem.spacecraft, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                  child: Text('Spacecraft: ' + this.spaceAgencyItem.spacecraft, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
                 
               ]

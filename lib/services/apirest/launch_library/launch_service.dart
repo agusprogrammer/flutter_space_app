@@ -35,38 +35,6 @@ class LaunchService {
     // return compute(parseLaunchList, response);
   }
 
-  /* metodo sin usar --
-  Future <List<Launch>> fetchGetLaunchListNextResults(Client client, String _nextResults) async {
-    
-    late List<Launch> _listLaunch = [];
-    Response _response = new Response('', 404);
-
-    try{
-
-      _response = await client.get(Uri.parse(_nextResults));
-      errorResponseBool = false;
-
-    }catch(e){
-      errorResponseBool = true;
-    }
-
-    if(errorResponseBool == false){
-      
-      if(_response.statusCode >= 200 && _response.statusCode < 300) {
-        // _listLaunch = parseLaunchList(_response);
-        _listLaunch.addAll(parseLaunchList(_response));
-        totalListLaunch.addAll(_listLaunch);
-      }
-
-      return totalListLaunch;
-    
-    } else {
-      return _listLaunch;
-    }
-
-  }
-  */
-
   List<Launch> parseLaunchList(Response response){
     List<Launch> _listLaunch = [];
     _listLaunch.clear();

@@ -1,89 +1,98 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/spacecraft/spacecraft.dart';
 
-class SpacecraftCardItem extends StatefulWidget{
-  
-  final Spacecraft spacecraft;
-  SpacecraftCardItem(this.spacecraft);
-
-  
-  @override
-  _SpacecraftCardItemState createState() => _SpacecraftCardItemState(this.spacecraft);
-
-}
-
-class _SpacecraftCardItemState extends State<SpacecraftCardItem>{
+class SpacecraftCardItem extends StatelessWidget{
   
   late Spacecraft spacecraft;
-  _SpacecraftCardItemState(this.spacecraft);
+  SpacecraftCardItem(this.spacecraft);
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding(
-      padding: EdgeInsets.only(bottom: 10, top: 10, left: 10, right: 10),
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: 5,
-        shadowColor: Colors.black,
-        child: Padding(
-          padding: EdgeInsets.all(10),
+    return  Container(
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 15, top: 10, left: 15, right: 15),
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 5,
+          shadowColor: Colors.black,
+          child: Padding(
+            padding: EdgeInsets.all(10),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Ink(
-                  height: 115,
+                  height: 240,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0), bottomLeft: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
                     image: DecorationImage(
                       image: NetworkImage(this.spacecraft.imageUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
+                
                 Padding(
-                  padding: EdgeInsets.only(bottom: 0, top: 1),
-                  child: Center(child: 
-                    Text(spacecraft.name, style: TextStyle(color: Colors.black, fontSize: 10)),
-                  )
+                  padding: EdgeInsets.only(bottom: 10, top: 5),
+                  child: Text(this.spacecraft.name, style: TextStyle(color: Color.fromRGBO(0, 0, 204, 1.0), fontSize: 22)),
                 ),
 
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text(this.spacecraft.description, style: TextStyle(color: Colors.black, fontSize: 20)),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text(this.spacecraft.spcConfName, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                ),
+
+                /*
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text(this.spacecraft.spcConfType, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                ),
+                */
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text('Agency', style: TextStyle(color: Colors.black, fontSize: 20)),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text(this.spacecraft.agencyName, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text('Type: ' + this.spacecraft.agencyType, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text('Status', style: TextStyle(color: Colors.black, fontSize: 20)),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text('Status: ' + this.spacecraft.status, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text('in use: ' + this.spacecraft.inUse, style: TextStyle(color: Colors.grey, fontSize: 15)),
+                ),
+                
+                
               ]
             )
-              
-          )
+          ),
         )
-      );
-      
-
-    /*
-    Padding(
-      padding: EdgeInsets.all(5.0),
-      child: Column(
-        children: [],
       )
-      
     );
-    */
-
-    /* 
-    Padding(
-      padding: EdgeInsets.all(5.0),
-      child: GridTile(
-      child: Image.network(this.spacecraft.imageUrl, fit:BoxFit.fill), // width: 100, height: 100
-      footer: Container(
-        decoration: new BoxDecoration(color: Color.fromRGBO(220, 220, 220, 1.0)),
-        child: Center(child: Text(this.spacecraft.name, style: TextStyle(color: Colors.black, fontSize: 15)),),
-      ),
-      ),
-      
-    );
-
-    */
-
-
   }
 
 }
+

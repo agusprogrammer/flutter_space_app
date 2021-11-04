@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '/globals.Dart' as globals;
 
 class LaunchList extends StatefulWidget {
   
@@ -31,49 +32,23 @@ class _LaunchListState extends State<LaunchList> {
   
   ScrollController _scrollController = new ScrollController();
   
+  late bool saveData;
   late List<Launch> launchL = [];
   _LaunchListState(this.launchL, this.saveData);
 
-  late bool saveData;
   late List<Launch> listLaunchesAdd = [];
-
-  // late bool scrollPosMaxBool = false;
-  // late double positionMax = 0;
 
   @override
   initState() {
     super.initState();
 
-    // timeRequest();
-    // openTheBox();
-    saveDataM();
+    dataRefresh();
     
     _scrollController.addListener(() {
       
-      /*
-      if(scrollPosMaxBool == false) {
-        positionMax = _scrollController.position.maxScrollExtent - 60.0;
-        scrollPosMaxBool = true;
-      }
-      */
-
-      // var triggerFetchMoreSize = 0.9 * _scrollController.position.maxScrollExtent;
-
-      // if(_scrollController.position.pixels > triggerFetchMoreSize){
-      
       if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-      
-        // if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
 
-        // if(_scrollController.position.pixels == triggerFetchMoreSize){
-
-        double positionPixels = _scrollController.position.pixels;
         double positionMax90 = 0.9 * _scrollController.position.maxScrollExtent;
-
-        
-
-        print(positionPixels);
-        print(positionMax90);
 
         fetchGetLaunchListNextResults(positionMax90);
       }
@@ -81,44 +56,15 @@ class _LaunchListState extends State<LaunchList> {
 
   }
 
-  openTheBox(){
-    
-    
-    
-    // Hive.openBox<LaunchHive>('launch_hive_box');
-    // boxOpened = Hive.isBoxOpen('launch_hive_box');
-
-
-    // LaunchHiveBox.getLaunches();
-    // LaunchHiveBox.openBoxLaunchHiveBox();
-
-  }
-
   @override
   void dispose() {
     super.dispose();
     _scrollController.dispose();
-
-    // Hive.close(); // close all boxes
-    Hive.box('launch_hive_box').close(); // close single box
-    // LaunchHiveBox.closeBoxLaunchHiveBox();
   }
 
   @override
   Widget build(BuildContext context) {
     
-    /*
-    return Container(
-      decoration: new BoxDecoration(color: Color.fromRGBO(220, 220, 220, 1.0)),
-      child: ListView.builder(
-        itemCount: launchL.length,
-        itemBuilder: (context, index) {
-          return new LaunchCardItem(launchL[index]);
-        }
-      )
-    );
-    */
-
     return CustomScrollView(
       controller: _scrollController,
       slivers: [
@@ -134,18 +80,10 @@ class _LaunchListState extends State<LaunchList> {
           delegate: SliverChildBuilderDelegate(
           (context, index) {
           
-          // guardar el listLaunchesAdd del scroll infinito en la base de datos
-          // addResultsDB();
-
             if (launchL.length > index) {
               return new LaunchCardItem(launchL[index]); 
             }
             
-            /*
-            else{
-              return new CircularProgressIndicator();
-            }*/
-          
           }),
         ),
       ],
@@ -153,31 +91,11 @@ class _LaunchListState extends State<LaunchList> {
   }
 
   // obtain the next results for infinite scroll
-  
-  /*
-  fetchNextResults() {
-    
-    List<Launch> listLaunchesLastFuture = [];
-
-    // listLaunchesLastFuture = futureListLaunches as List<Launch>;
-    String _nextResultsStr = launchL.last.nextResults;
-    // listLaunchesLastFuture = launchService.fetchGetLaunchListNextResults(http.Client(), _nextResultsStr) as List<Launch>;
-    // launchL.addAll(listLaunchesLastFuture);
-
-  }
-  */
-
   fetchGetLaunchListNextResults(double positionMax90) async {
     
-    // late String _nextResults = '';
     Response _response = new Response('', 404);
     late bool errorResponseBool = true;
-
-    // _nextResults = launchL.last.nextResults;
-    // print(launchL.last.nextResults);
-
     late List<Launch> _launchLNextResults = [];
-    // _launchLNextResults.clear();
 
     try{
 
@@ -191,72 +109,45 @@ class _LaunchListState extends State<LaunchList> {
     if(errorResponseBool == false){
       
       if(_response.statusCode >= 200 && _response.statusCode < 300) {
-        // _listLaunch = parseLaunchList(_response);
+
         _launchLNextResults.addAll(launchService.parseLaunchList(_response));
 
-        for(Launch launch in _launchLNextResults) {
-          print('Launch scroll: ' + launch.name);
-        }
-
         launchL.addAll(_launchLNextResults);
-        // scrollPosMaxBool = false;
 
         if(saveData == true){
           
           listLaunchesAdd.clear();
           listLaunchesAdd.addAll(_launchLNextResults);
 
-          // _scrollController.notifyListeners();
-
-          /*
-          for(Launch launchAdd in listLaunchesAdd){
-            print('Launch add: ' + launchAdd.name);
-          }
-          */
-
           _scrollController.jumpTo(positionMax90);
-
-          // sino va mirar el ciclo de vida
-          // addResultsDB();
 
         }
         
-        // prueba de scroll borrar luego
-      } else {
-        // launchL.addAll(obtainResultsFromDb());
-        // _scrollController.notifyListeners();
-        
-        _scrollController.jumpTo(positionMax90);
-        print(launchL.length.toString());
-        
-        // prueba, borrar luego
-        // listLaunchesAdd.clear();
-        // listLaunchesAdd.addAll(_launchLNextResults);
-
-        // addResultsDB();
-      }
+      } 
     
     } 
 
   }
-
-  // database
   
 
-  // save data
-  saveDataM(){
+  // refresh the database
+  dataRefresh(){
 
     if(saveData == true){
 
       listLaunchesAdd.addAll(launchL);
 
-      // hacer un select antes si eso
-
       deleteResultsDB();
-      addResultsDB();
-
+      if(globals.hiveSaveDateBool == true){
+        addResultsDB();
+      }
+      
     } else {
-      launchL = obtainResultsFromDb();
+
+      if(globals.hiveSaveDateBool == true){
+        launchL = obtainResultsFromDb();
+      }
+      
     }
 
   }
@@ -268,8 +159,6 @@ class _LaunchListState extends State<LaunchList> {
 
     for(Launch launch in listLaunchesAdd){
 
-      //print(launch.padLocationName);
-      
       late LaunchHive launchHive = new LaunchHive()
       ..id = launch.id
       ..url = launch.url
@@ -310,61 +199,26 @@ class _LaunchListState extends State<LaunchList> {
 
     }
 
-    // var box = Hive.box('launch_hive_box');
-    var box = LaunchHiveBox.getLaunches();
+    var box = LaunchHiveBox.getLaunchBox();
     box.addAll(listLaunchHiveAdd);
     
-    // final launchHiveBox = LaunchHiveBox.getLaunches(); 
-    // launchHiveBox.addAll(listLaunchHiveAdd);
-    
-
-    
-    // late List<LaunchHive> _listLaunchHiveSelect = [];
-
-    // final boxSelect = LaunchHiveBox.getLaunches();
-    // _listLaunchHiveSelect = box.values.cast<LaunchHive>().toList();
-
-    /*
-    for(LaunchHive launchHive in _listLaunchHiveSelect){
-      print(launchHive.name.toString());
-    }
-    */
     
   }
 
   // delete
   deleteResultsDB() {
     
-    // final launchHiveBox = LaunchHiveBox.getLaunches(); 
-    // late List<LaunchHive>? launchHiveList = [];
-    var box = LaunchHiveBox.getLaunches();
-
-    // launchHiveList = launchHiveBox.values.cast<LaunchHive>().toList();
-    // launchHiveList = box.values.cast<LaunchHive>().toList();
-
-    // box.clear();
+    var box = LaunchHiveBox.getLaunchBox();
     box.deleteAll(box.keys);
-    
-    // launchHiveList = [];
-    // launchHiveList = box.values.cast<LaunchHive>().toList();
-
 
   }
 
   // select
   List<Launch> obtainResultsFromDb() {
-    // futureListLaunches
+
     late List<LaunchHive>? launchHiveList = [];
 
-    // ver si obtine datos asi:
-
-    // Otra forma:
-
-    // ValueListenable<Box<LaunchHive>> valueListenable = LaunchHiveBox.getLaunches().listenable();
-    // launchHiveList = valueListenable as List<LaunchHive>;
-
-    // usando un box:
-    var box = LaunchHiveBox.getLaunches();
+    var box = LaunchHiveBox.getLaunchBox();
     launchHiveList = box.values.cast<LaunchHive>().toList();
 
     List<Launch> _listLaunches = [];
@@ -387,8 +241,6 @@ class _LaunchListState extends State<LaunchList> {
       _listLaunches.add(launch);
 
     }
-
-    // print('length: ' + _listLaunches.length.toString());
 
     return  _listLaunches;
 
