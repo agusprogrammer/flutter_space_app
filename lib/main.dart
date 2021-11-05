@@ -14,6 +14,8 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'models/hive_database/launch_library/astronaut/astronaut_hive.dart';
 import 'models/hive_database/launch_library/event/event_hive.dart';
 import 'models/hive_database/launch_library/launch/launch_hive.dart';
@@ -108,10 +110,14 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         buttonBackgroundColor: Color.fromRGBO(0, 0, 204, 1.0),
         backgroundColor: Color.fromRGBO(220, 220, 220, 1.0),
         items: <Widget>[
-          Icon(Icons.article, size: 30, color: Colors.white),
-          Icon(Icons.history, size: 30, color: Colors.white),
-          Icon(Icons.flight, size: 30, color: Colors.white),
-          Icon(Icons.menu_book, size: 30, color: Colors.white)
+          Icon(FontAwesomeIcons.newspaper, size: 30, color: Colors.white),
+          // Icon(Icons.article, size: 30, color: Colors.white),
+          Icon(FontAwesomeIcons.rocket, size: 30, color: Colors.white),
+          // Icon(Icons.history, size: 30, color: Colors.white),
+          Icon(FontAwesomeIcons.spaceShuttle, size: 30, color: Colors.white),
+          // Icon(Icons.flight, size: 30, color: Colors.white),
+          Icon(FontAwesomeIcons.satellite, size: 30, color: Colors.white)
+          // Icon(Icons.menu_book, size: 30, color: Colors.white)
         ],
         onTap: (index) {
           setState(() {
