@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Card for show the http error on screen.
 class CardErrorStatusSpApp extends StatelessWidget {
   late String errorCode;
   late String messageCode;

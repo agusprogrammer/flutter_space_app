@@ -1,7 +1,4 @@
-
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter_space_app/models/apirest/spaceflight_news/report/report.dart';
 import 'package:http/http.dart';
 
@@ -11,6 +8,7 @@ class ReportService {
   late List<Report> listReports = [];
   late bool errorResponseBool = true;
 
+  // Obtain a list of report with get from url
   Future<List<Report>> fetchGetReportsLimit(Client client, int _numResults) async {
 
     try{
@@ -33,11 +31,13 @@ class ReportService {
 
   }
 
+  // converts the Json of the response to a list
   List<Report> parseReports(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Report>((json) => Report.fromJson(json)).toList();
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

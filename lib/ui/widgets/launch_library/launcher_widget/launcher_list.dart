@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/launcher/launcher.dart';
 import 'package:flutter_space_app/models/hive_database/launch_library/launcher/launcher_hive.dart';
 import 'package:flutter_space_app/services/apirest/launch_library/launcher_service.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/launcher_hive_box.dart';
+import 'package:flutter_space_app/services/hive_db_boxes/launch_library/launcher_hive_box.dart';
 import 'package:flutter_space_app/ui/widgets/graphic_components/navigation_button_sp_app.dart';
 import 'package:flutter_space_app/ui/widgets/launch_library/launcher_widget/launcher_carditem.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +28,7 @@ class _LauncherList extends State<LauncherList>{
 
   ScrollController _scrollController = new ScrollController();
 
-  late bool saveData;
+  late bool saveData; // save data if dont have errors
   late List<Launcher> launcherL;
   _LauncherList(this.launcherL, this.saveData);
 
@@ -89,6 +89,7 @@ class _LauncherList extends State<LauncherList>{
 
   }
 
+  // obtain the next results for infinite scroll
   fetchGetLaunchersListNextResults(double positionMax90) async {
 
     Response _response = new Response('', 404);
@@ -127,6 +128,9 @@ class _LauncherList extends State<LauncherList>{
 
   }
 
+  // Updadate hive database, first erase the last data after save new data
+  // but if we have an error and cannot show the data that come 
+  // from eventL list obtain the stored data
   dataRefresh(){
 
     if(saveData == true){
@@ -186,6 +190,7 @@ class _LauncherList extends State<LauncherList>{
 
   }
 
+  // delete all
   deleteResultsDB() {
 
     var box = LauncherHiveBox.getLauncherBox();
@@ -193,6 +198,7 @@ class _LauncherList extends State<LauncherList>{
 
   }
 
+  // obtain all
   List<Launcher> obtainResultsFromDb() {
 
     late List<LauncherHive>? launcherHiveList = [];

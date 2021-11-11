@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/launch_library_resp.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/launch_library_resp.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_station.dart';
 import 'package:flutter_space_app/models/hive_database/launch_library/space_station/space_station_hive.dart';
 import 'package:flutter_space_app/services/apirest/launch_library/space_station_service.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/space_station_hive_box.dart';
+import 'package:flutter_space_app/services/hive_db_boxes/launch_library/space_station_hive_box.dart';
 import 'package:flutter_space_app/ui/widgets/graphic_components/navigation_button_sp_app.dart';
 import 'package:flutter_space_app/ui/widgets/launch_library/space_station_widget/space_station_carditem.dart';
 import 'package:http/http.dart' as http;
@@ -16,9 +14,7 @@ class SpaceStationList extends StatefulWidget {
   SpaceStationList({Key? key, required this.spaceStationL, required this.saveData}) : super(key: key);
 
   late List<SpaceStation> spaceStationL;
-  late bool saveData;
-
-  // List<SpaceStation> spaceStationsL;
+  late bool saveData; // save data if dont have errors
 
   @override
   _SpaceStationState createState() => _SpaceStationState(this.spaceStationL, this.saveData);
@@ -31,7 +27,7 @@ class _SpaceStationState extends State<SpaceStationList>{
 
   ScrollController _scrollController = new ScrollController();
 
-  late bool saveData;
+  late bool saveData; // save data if dont have errors
   late List<SpaceStation> spaceStationL;
 
   _SpaceStationState(this.spaceStationL, this.saveData);
@@ -59,16 +55,6 @@ class _SpaceStationState extends State<SpaceStationList>{
 
   @override
   Widget build(BuildContext context) {
-  /*
-    return Container(
-      decoration: new BoxDecoration(color: Color.fromRGBO(220, 220, 220, 1.0)),
-      child: ListView.builder(
-        itemCount: spaceStationL.length,
-        itemBuilder: (context, index) {
-          return new SpaceStationCardItem(spaceStationL[index]);
-        },
-      ));
-      */
 
       return CustomScrollView(
          controller: _scrollController,
@@ -99,6 +85,7 @@ class _SpaceStationState extends State<SpaceStationList>{
 
   }
 
+  // obtain the next results for infinite scroll
   fetchGetSpaceStationListNextResults(double positionMax90) async {
 
     Response _response = new Response('', 404);
@@ -137,6 +124,9 @@ class _SpaceStationState extends State<SpaceStationList>{
 
   }
 
+  // Updadate hive database, first erase the last data after save new data
+  // but if we have an error and cannot show the data that come 
+  // from eventL list obtain the stored data
   dataRefresh(){
 
     if(saveData == true){
@@ -192,12 +182,13 @@ class _SpaceStationState extends State<SpaceStationList>{
 
   }
 
-  // delete
+  // delete all
   deleteResultsDB() {
     var box = SpaceStationHiveBox.getSpaceStationBox();
     box.deleteAll(box.keys);
   }
 
+  // obtain all
   List<SpaceStation> obtainResultsFromDb() {
 
     late List<SpaceStationHive>? spaceStationHiveList = [];

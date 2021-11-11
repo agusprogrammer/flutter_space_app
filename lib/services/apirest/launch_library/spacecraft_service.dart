@@ -1,6 +1,5 @@
 
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/spacecraft/spacecraft.dart';
 import 'package:http/http.dart';
 
@@ -10,6 +9,7 @@ class SpacecraftService {
   late List<Spacecraft> spacecraftList;
   late bool errorResponseBool = true; 
 
+  // Obtain a list of spacecraft with get from url
   Future <List<Spacecraft>> fetchGetSpacecraftList(Client client, int _numResults) async {
     
     try{
@@ -23,9 +23,6 @@ class SpacecraftService {
       Response responseCatch = new Response('', 404, reasonPhrase: 'Data not found, check your internet conection.');
       _resp = responseCatch;
 
-      // spacecraftList = parseSpacecraftList(_resp);
-      // return compute(parseSpacecraftList, response);
-
     }
 
     if(errorResponseBool == false){
@@ -36,6 +33,7 @@ class SpacecraftService {
     
   } 
 
+  // converts the Json of the response to a list
   List<Spacecraft> parseSpacecraftList(Response response){
     List<Spacecraft> _listSpaceCraft = [];
 
@@ -96,6 +94,7 @@ class SpacecraftService {
     return _listSpaceCraft;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

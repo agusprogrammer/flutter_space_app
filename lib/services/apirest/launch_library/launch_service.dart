@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/launch/launch.dart';
 import 'package:http/http.dart';
 
@@ -10,6 +8,7 @@ class LaunchService {
   late List<Launch> totalListLaunch;
   late bool errorResponseBool = true;
 
+  // Obtain a list of launch with get from url
   Future <List<Launch>> fetchGetLaunchList(Client client, int _numResults) async {
     
     try{
@@ -32,9 +31,9 @@ class LaunchService {
     }
     
     return totalListLaunch;
-    // return compute(parseLaunchList, response);
   }
 
+  // converts the Json of the response to a list
   List<Launch> parseLaunchList(Response response){
     List<Launch> _listLaunch = [];
     _listLaunch.clear();
@@ -85,8 +84,7 @@ class LaunchService {
           lastUpdated: elementResult['last_updated'].toString(), 
           net: elementResult['net'].toString(), 
           windowEnd: elementResult['window_end'].toString(), 
-          windowStart: elementResult['window_start'].toString(), 
-          // probability: int.parse(elementResult['probability'].toString()), 
+          windowStart: elementResult['window_start'].toString(),
           holdreason: elementResult['holdreason'].toString(), 
           failreason: elementResult['failreason'].toString(),
 
@@ -126,6 +124,7 @@ class LaunchService {
     return _listLaunch;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

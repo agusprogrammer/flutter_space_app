@@ -1,6 +1,4 @@
 
-import 'package:http/http.dart';
-
 class Launch {
   final String id;
   final String url;
@@ -16,7 +14,6 @@ class Launch {
   final String net;
   final String windowEnd;
   final String windowStart;
-  // final int probability;
   final String holdreason;
   final String failreason;
 
@@ -49,8 +46,7 @@ class Launch {
   const Launch({
     required this.id, required this.url, required this.slug, required this.name, required this.statusId, 
     required this.statusName, required this.statusAbbrev, required this.statusDescription, 
-    required this.lastUpdated, required this.net, required this.windowEnd, required this.windowStart, 
-    // required this.probability, 
+    required this.lastUpdated, required this.net, required this.windowEnd, required this.windowStart,
     required this.holdreason, required this.failreason, required this.launchServProvId, 
     required this.launchServProvUrl, required this.launchServProvName, required this.launchServProvType, 
     required this.rocketName, required this.rocketFamily, required this.rocketFullName, required this.rocketVariant, 

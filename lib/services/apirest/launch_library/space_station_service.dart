@@ -1,20 +1,15 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/launch_library_resp.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_st_active_expedition.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_st_owner.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_station.dart';
 
 import 'package:http/http.dart';
 
 class SpaceStationService {
-  
-  // final int _numResults = 10;
 
   late Response _resp;
   late List<SpaceStation> spaceStationList;
   late bool errorResponseBool = true; 
 
+  // Obtain a list of space station with get from url
   Future <List<SpaceStation>> fetchGetSpaceStationList(Client client, int _numResults) async {
     
     try{
@@ -37,22 +32,10 @@ class SpaceStationService {
     }
     
     return spaceStationList;
-    // return compute(parseSpaceStations, response);
   }
 
-  /*
-  Future <List<LaunchLibraryResp>> fetchGetSpaceStationList(Client client) async {
-    final response = await client.get(Uri.parse('https://ll.thespacedevs.com/2.2.0/spacestation/?limit=$_numResults'));
-    return compute(parseLaunchLibrary, response.body);
-  }
-  */
-
+  // converts the Json of the response to a list
   List<SpaceStation> parseSpaceStations(Response response) {
-    // final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    // var returnData;
-    // return parsed.map<LaunchLibraryResp>((json) => SpaceStation.fromJson(json)).toList();
-    // print(returnData['results'].toString());
-    // return returnData['results'];
 
     List<SpaceStation> _listSpaceStation = [];
 
@@ -63,7 +46,6 @@ class SpaceStationService {
 
     data.forEach((element) { 
       Map obj = element;
-      // print(obj['next'].toString());
       List<dynamic> listObj = obj['results'];
 
       String nextResultsStr = obj['next'].toString();
@@ -72,46 +54,10 @@ class SpaceStationService {
       if(nextResultsStr == null){ nextResultsStr = ''; }
       if(previousResultsStr == null){ previousResultsStr = ''; }
 
-      listObj.forEach((elementResult) { 
-        // print(elementResult['name'].toString());
+      listObj.forEach((elementResult) {
 
         Map statusMap = elementResult['status'];
-        Map typeMap = elementResult['type'];
-
-        /*
-        List<dynamic> listDynOwners = elementResult['owners'];
-        List<SpaceStOwner> listOwners = [];
-
-        listDynOwners.forEach((elementOwner) { 
-
-          SpaceStOwner spaceStOwner = new SpaceStOwner(
-            id: int.parse(elementOwner['id'].toString()), 
-            url: elementOwner['url'].toString(), 
-            name: elementOwner['name'].toString(), 
-            abbrev: elementOwner['abbrev'].toString()
-          );
-
-          listOwners.add(spaceStOwner);
-
-        });
-
-        List<dynamic> listDynExpd = elementResult['owners'];
-        List<SpaceStActiveExpedition> listExped = [];
-
-        listDynExpd.forEach((elementExpd) { 
-
-          SpaceStActiveExpedition spaceStActExped = new SpaceStActiveExpedition(
-            id: int.parse(elementExpd['id'].toString()),
-            url: elementExpd['url'].toString(),
-            name: elementExpd['name'].toString(),
-            start: elementExpd['start'].toString(),
-            end: elementExpd['end'].toString()
-          );
-
-          listExped.add(spaceStActExped);
-
-        });  
-        */      
+        Map typeMap = elementResult['type'];  
 
         SpaceStation spaceStation = new SpaceStation(
           id: int.parse(elementResult['id'].toString()),
@@ -125,8 +71,6 @@ class SpaceStationService {
           deorbited: elementResult['deorbited'].toString(),
           description: elementResult['description'].toString(),
           orbit: elementResult['orbit'].toString(),
-          // owners: listOwners,
-          // expeditions: listExped,
           imageUrl: elementResult['image_url'].toString(),
 
           nextResults: nextResultsStr,
@@ -142,6 +86,7 @@ class SpaceStationService {
     return _listSpaceStation;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

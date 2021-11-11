@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/space_agency/space_agency.dart';
 import 'package:flutter_space_app/models/hive_database/launch_library/space_agency/space_agency_hive.dart';
 import 'package:flutter_space_app/services/apirest/launch_library/space_agency_service.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/space_agency_hive_box.dart';
+import 'package:flutter_space_app/services/hive_db_boxes/launch_library/space_agency_hive_box.dart';
 import 'package:flutter_space_app/ui/widgets/launch_library/space_agency_widget/space_agency_carditem.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -28,7 +28,7 @@ class _SpaceAgencyListState extends State<SpaceAgencyList>{
 
   ScrollController _scrollController = new ScrollController();
 
-  late bool saveData;
+  late bool saveData; // save data if dont have errors
   late List<SpaceAgency> spaceAgencyL;
   
   _SpaceAgencyListState(this.spaceAgencyL, this.saveData);
@@ -88,6 +88,7 @@ class _SpaceAgencyListState extends State<SpaceAgencyList>{
 
   }
 
+  // obtain the next results for infinite scroll
   fetchGetSpaceAgencyListNextResults(double positionMax90) async {
 
     Response _response = new Response('', 404);
@@ -126,6 +127,9 @@ class _SpaceAgencyListState extends State<SpaceAgencyList>{
 
   }
 
+  // Updadate hive database, first erase the last data after save new data
+  // but if we have an error and cannot show the data that come 
+  // from eventL list obtain the stored data
   dataRefresh(){
 
     if(saveData == true){
@@ -183,7 +187,7 @@ class _SpaceAgencyListState extends State<SpaceAgencyList>{
 
   }
 
-  // delete
+  // delete all
   deleteResultsDB() {
 
     var box = SpaceAgencyHiveBox.getSpaceAgencyBox();
@@ -191,6 +195,7 @@ class _SpaceAgencyListState extends State<SpaceAgencyList>{
 
   }
 
+  // obtain all
   List<SpaceAgency> obtainResultsFromDb() {
 
     late List<SpaceAgencyHive>? spaceAgencyHiveList = [];

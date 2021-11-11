@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// Url button for navigate and obtain information from internet.
 class NavigationUrlButton extends StatefulWidget {
   
   late String titleButton;
@@ -40,18 +41,12 @@ class _NavigationUrlButtonState extends State<NavigationUrlButton> {
     
   }
 
+  // Method for open an url in your browser
   _launchURL() async{
     if (await canLaunch(urlButton )) {
       await launch(urlButton);
     } else {
       throw 'Could not launch $urlButton';
-
-      /*
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ToastContext(),
-      ));
-      */
-
     }
   }
   

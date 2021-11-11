@@ -34,19 +34,6 @@ class _LaunchCardItemState extends State<LaunchCardItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
 
-                /*
-                Ink(
-                  height: 240,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-                    image: DecorationImage(
-                      image: NetworkImage(this.launch.image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                */
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 10, top: 5),
                   child: Text(this.launch.name, style: TextStyle(color: Color.fromRGBO(0, 0, 204, 1.0), fontSize: 22)),

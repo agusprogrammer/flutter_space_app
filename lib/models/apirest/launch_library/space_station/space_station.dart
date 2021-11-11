@@ -1,9 +1,4 @@
 
-
-import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_st_active_expedition.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_st_owner.dart';
-import 'package:http/http.dart';
-
 class SpaceStation{
   
   final int id;
@@ -17,8 +12,6 @@ class SpaceStation{
   final String deorbited;
   final String description;
   final String orbit;
-  // final List<SpaceStOwner> owners;
-  // final List<SpaceStActiveExpedition> expeditions;
   final String imageUrl;
 
   final String nextResults;
@@ -37,8 +30,6 @@ class SpaceStation{
       required this.deorbited,
       required this.description,
       required this.orbit,
-      // required this.owners,
-      // required this.expeditions,
       required this.imageUrl,
       required this.nextResults,
       required this.previousResults

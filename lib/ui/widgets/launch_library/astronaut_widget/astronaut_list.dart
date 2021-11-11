@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/astronaut/astronaut.dart';
 import 'package:flutter_space_app/models/hive_database/launch_library/astronaut/astronaut_hive.dart';
 import 'package:flutter_space_app/services/apirest/launch_library/astronaut_service.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/astronaut_hive_box.dart';
+import 'package:flutter_space_app/services/hive_db_boxes/launch_library/astronaut_hive_box.dart';
 import 'package:flutter_space_app/ui/widgets/launch_library/astronaut_widget/astronaut_carditem.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +26,7 @@ class _AstronautList extends State<AstronautList>{
 
   ScrollController _scrollController = new ScrollController();
 
-  late bool saveData;
+  late bool saveData; // save data if dont have errors
   late List<Astronaut> astronautL;
   _AstronautList(this.astronautL, this.saveData);
 
@@ -86,7 +86,6 @@ class _AstronautList extends State<AstronautList>{
   }
 
   // obtain the next results for infinite scroll
-  
   fetchGetAstronautListNextResults(double positionMax90) async {
 
     Response _response = new Response('', 404);
@@ -115,7 +114,7 @@ class _AstronautList extends State<AstronautList>{
           listAstronautsAdd.clear();
           listAstronautsAdd.addAll(_astronautLNextResults);
 
-          _scrollController.jumpTo(positionMax90);
+          _scrollController.jumpTo(positionMax90); // move the scroll for recharge the list
 
         }
         
@@ -125,6 +124,9 @@ class _AstronautList extends State<AstronautList>{
 
   }
 
+  // Updadate hive database, first erase the last data after save new data
+  // but if we have an error and cannot show the data that come 
+  // from astronautL list obtain the stored data
   dataRefresh(){
 
     if(saveData == true){
@@ -147,7 +149,7 @@ class _AstronautList extends State<AstronautList>{
 
   }
 
-   // add all
+  // add all
   addResultsDB() {
 
     late List<AstronautHive> listAstronautHiveAdd = [];
@@ -183,7 +185,7 @@ class _AstronautList extends State<AstronautList>{
 
   }
 
-
+  // delete all
   deleteResultsDB() {
 
     var box = AstronautHiveBox.getAstronautBox();
@@ -191,6 +193,7 @@ class _AstronautList extends State<AstronautList>{
 
   }
   
+  // obtain all
   List<Astronaut> obtainResultsFromDb() {
 
     late List<AstronautHive>? astronautHiveList = [];

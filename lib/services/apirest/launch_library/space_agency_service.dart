@@ -1,7 +1,5 @@
 
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/space_agency/space_agency.dart';
 import 'package:http/http.dart';
 
@@ -11,6 +9,7 @@ class  SpaceAgencyService {
   late List<SpaceAgency> listSpaceAgency;
   late bool errorResponseBool = true;
 
+  // Obtain a list of space agency with get from url
   Future<List<SpaceAgency>> fetchGetSpaceAgencyList(Client client, int _numResults) async {
     
     try{
@@ -33,9 +32,9 @@ class  SpaceAgencyService {
     }
     
     return listSpaceAgency;
-    // return compute(parseSpaceAgencyList, response);
   }
 
+  // converts the Json of the response to a list
   List<SpaceAgency> parseSpaceAgencyList(Response response) {
     List<SpaceAgency> _listSpaceAgency = [];
 
@@ -60,7 +59,6 @@ class  SpaceAgencyService {
           id: int.parse(elementResult['id'].toString()), 
           url: elementResult['url'].toString(), 
           name: elementResult['name'].toString(), 
-          // featured: elementResult['featured'].toString(), 
           type: elementResult['type'].toString(), 
           countryCode: elementResult['country_code'].toString(), 
           abbrev: elementResult['abbrev'].toString(), 
@@ -85,6 +83,7 @@ class  SpaceAgencyService {
     return _listSpaceAgency;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

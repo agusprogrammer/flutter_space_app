@@ -1,5 +1,3 @@
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/astronaut/astronaut.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -10,6 +8,7 @@ class AstronautService {
   late List<Astronaut> listAstronaut;
   late bool errorResponseBool = true;
 
+  // Obtain a list of astronauts with get from url
   Future <List<Astronaut>> fetchGetAstronautList(Client client, int _numResults) async {
     
     try{
@@ -32,9 +31,9 @@ class AstronautService {
     }
     
     return listAstronaut;
-    // return compute(parseAstronautList, response);
   }
 
+  // converts the Json of the response to a list
   List<Astronaut> parseAstronautList(Response response){
     List<Astronaut> _listAstronaut = [];
 
@@ -89,6 +88,7 @@ class AstronautService {
     return _listAstronaut;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

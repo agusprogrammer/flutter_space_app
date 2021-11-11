@@ -48,13 +48,6 @@ class SpacecraftCardItem extends StatelessWidget{
                   child: Text(this.spacecraft.spcConfName, style: TextStyle(color: Colors.grey, fontSize: 15)),
                 ),
 
-                /*
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Text(this.spacecraft.spcConfType, style: TextStyle(color: Colors.grey, fontSize: 15)),
-                ),
-                */
-
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: Text('Agency', style: TextStyle(color: Colors.black, fontSize: 20)),

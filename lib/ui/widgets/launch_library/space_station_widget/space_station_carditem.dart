@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_space_app/models/apirest/launch_library/launch_library_resp.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/space_station/space_station.dart';
 
 class SpaceStationCardItem extends StatelessWidget{

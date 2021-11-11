@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 import 'package:flutter_space_app/models/apirest/launch_library/launcher/launcher.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
 class LauncherService {
@@ -10,6 +9,7 @@ class LauncherService {
   late List<Launcher> launcherList;
   late bool errorResponseBool = true; 
 
+  // Obtain a list of launcher with get from url
   Future <List<Launcher>> fetchLauncherList(Client client, int _numResults) async {
     
     try{ 
@@ -22,10 +22,6 @@ class LauncherService {
 
       Response responseCatch = new Response('', 404, reasonPhrase: 'Data not found, check your internet conection.');
       _resp = responseCatch;
-      // launcherList = parseLauncherList(_resp);
-      // launcherList = null;
-
-      // return compute(parseLauncherList, response);
 
     }
     
@@ -39,6 +35,7 @@ class LauncherService {
     
   }
 
+  // converts the Json of the response to a list
   List<Launcher> parseLauncherList(Response response){
     List<Launcher> _launcherList = [];
 
@@ -93,6 +90,7 @@ class LauncherService {
     return _launcherList;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

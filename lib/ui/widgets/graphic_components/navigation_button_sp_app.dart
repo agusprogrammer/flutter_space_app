@@ -6,6 +6,7 @@ import 'package:flutter_space_app/ui/pages/info/info_deatils/info_astronaut_page
 import 'package:flutter_space_app/ui/pages/info/info_deatils/info_space_agency_page.dart';
 import 'package:flutter_space_app/ui/pages/spacecraft/spacecraft_details/spacecraft_page.dart';
 
+// Button for navigate between the screens or pages of the app.
 class NavigationButtonSpApp extends StatefulWidget {
 
   late String text = '';
@@ -38,8 +39,6 @@ class _NavigationButtonSpAppState extends State<NavigationButtonSpApp> {
       child: ElevatedButton(
         style: style,
         onPressed: () {
-          // Navigator.push(context, new MaterialPageRoute(builder: (context) => new Page()));
-          // Navigator.pushNamed(context, this.routeNavigationStr);
 
           switch(this.routeNavigationStr) {
             case 'reports': { 
@@ -73,9 +72,6 @@ class _NavigationButtonSpAppState extends State<NavigationButtonSpApp> {
       ),
     );
   }
-
-  // hacer metodo para navegar
-
 
 }
 

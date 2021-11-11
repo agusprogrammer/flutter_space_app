@@ -1,6 +1,4 @@
 
-import 'package:http/http.dart';
-
 class Launcher {
   final int id;
   final String url;

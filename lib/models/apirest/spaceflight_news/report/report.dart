@@ -1,6 +1,4 @@
 
-import 'package:http/http.dart';
-
 class Report {
 
   final int id;

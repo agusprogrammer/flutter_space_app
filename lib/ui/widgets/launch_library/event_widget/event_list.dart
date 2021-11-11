@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/event/event.dart';
 import 'package:flutter_space_app/models/hive_database/launch_library/event/event_hive.dart';
 import 'package:flutter_space_app/services/apirest/launch_library/event_service.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/event_hive_box.dart';
+import 'package:flutter_space_app/services/hive_db_boxes/launch_library/event_hive_box.dart';
 import 'package:flutter_space_app/ui/widgets/launch_library/event_widget/event_carditem.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -26,7 +26,7 @@ class _EventListState extends State<EventList>{
 
   ScrollController _scrollController = new ScrollController();
 
-  late bool saveData;
+  late bool saveData; // save data if dont have errors
   late List<Event> eventL;
   _EventListState(this.eventL, this.saveData);
 
@@ -112,7 +112,7 @@ class _EventListState extends State<EventList>{
           listEventsAdd.clear();
           listEventsAdd.addAll(_eventLNextResults);
 
-          _scrollController.jumpTo(positionMax90);
+          _scrollController.jumpTo(positionMax90); // move the scroll for recharge the list
 
         }
         
@@ -122,6 +122,9 @@ class _EventListState extends State<EventList>{
 
   }
 
+  // Updadate hive database, first erase the last data after save new data
+  // but if we have an error and cannot show the data that come 
+  // from eventL list obtain the stored data
   dataRefresh(){
 
     if(saveData == true){
@@ -175,6 +178,7 @@ class _EventListState extends State<EventList>{
 
   }
 
+  // delete all
   deleteResultsDB() {
 
     var box = EventHiveBox.getEventBox();
@@ -182,6 +186,7 @@ class _EventListState extends State<EventList>{
 
   }
   
+  // obtain all
   List<Event> obtainResultsFromDb() {
 
     late List<EventHive>? eventHiveList = [];

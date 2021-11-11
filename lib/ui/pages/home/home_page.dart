@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_space_app/models/apirest/spaceflight_news/article/article.dart';
 import 'package:flutter_space_app/models/apirest/spaceflight_news/blog/blog.dart';
-import 'package:flutter_space_app/models/apirest/spaceflight_news/report/report.dart';
-import 'package:flutter_space_app/services/apirest/spaceflight_news/article_service.dart';
 import 'package:flutter_space_app/services/apirest/spaceflight_news/blog_service.dart';
-import 'package:flutter_space_app/services/apirest/spaceflight_news/report_service.dart';
 import 'package:flutter_space_app/ui/widgets/graphic_components/card_error_status_sp_app.dart';
 import 'package:flutter_space_app/ui/widgets/graphic_components/navigation_button_sp_app.dart';
-import 'package:flutter_space_app/ui/widgets/spaceflight_news/article_widget/article_list.dart';
 import 'package:flutter_space_app/ui/widgets/spaceflight_news/blog_widget/blog_list_home_page.dart';
-import 'package:flutter_space_app/ui/widgets/spaceflight_news/blog_widget/blog_list.dart';
-import 'package:flutter_space_app/ui/widgets/spaceflight_news/blog_widget/blog_list_blocked.dart';
-import 'package:flutter_space_app/ui/widgets/spaceflight_news/report_widget/report_list.dart';
-import 'package:flutter_space_app/ui/widgets/spaceflight_news/report_widget/report_list_blocked.dart';
+
 import 'package:http/http.dart' as http;
 
+// the first page showed
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();

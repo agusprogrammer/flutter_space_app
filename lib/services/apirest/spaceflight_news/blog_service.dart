@@ -1,7 +1,4 @@
-
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter_space_app/models/apirest/spaceflight_news/blog/blog.dart';
 import 'package:http/http.dart';
 
@@ -11,6 +8,7 @@ class BlogService {
   late List<Blog> listBlogs = [];
   late bool errorResponseBool = true; 
 
+  // Obtain a list of blog with get from url
   Future <List<Blog>>fetchGetBlogsLimit(Client client, int _numResults) async {
     
     try{
@@ -34,11 +32,13 @@ class BlogService {
     return listBlogs; 
   }
 
+  // converts the Json of the response to a list
   List<Blog> parseBlogs(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Blog>((json) => Blog.fromJson(json)).toList();
   }
   
+  // method for obtain the response for show http errors on graphic interface  
   Response obtainResponse() {
     return _resp;
   }

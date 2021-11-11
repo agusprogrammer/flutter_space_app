@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_space_app/models/apirest/launch_library/launch/launch.dart';
 import 'package:flutter_space_app/models/hive_database/launch_library/launch/launch_hive.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/launch_hive_box.dart';
-import 'package:flutter_space_app/services/hive_db_boxes/launch_hive_box.dart';
+import 'package:flutter_space_app/services/hive_db_boxes/launch_library/launch_hive_box.dart';
 import 'package:flutter_space_app/ui/widgets/launch_library/launch_widget/launch_carditem.dart';
 import 'package:flutter_space_app/services/apirest/launch_library/launch_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '/globals.Dart' as globals;
 
 class LaunchList extends StatefulWidget {
@@ -32,7 +26,7 @@ class _LaunchListState extends State<LaunchList> {
   
   ScrollController _scrollController = new ScrollController();
   
-  late bool saveData;
+  late bool saveData; // save data if dont have errors
   late List<Launch> launchL = [];
   _LaunchListState(this.launchL, this.saveData);
 
@@ -129,8 +123,9 @@ class _LaunchListState extends State<LaunchList> {
 
   }
   
-
-  // refresh the database
+  // Updadate hive database, first erase the last data after save new data
+  // but if we have an error and cannot show the data that come 
+  // from eventL list obtain the stored data
   dataRefresh(){
 
     if(saveData == true){
@@ -205,7 +200,7 @@ class _LaunchListState extends State<LaunchList> {
     
   }
 
-  // delete
+  // delete all
   deleteResultsDB() {
     
     var box = LaunchHiveBox.getLaunchBox();
@@ -213,7 +208,7 @@ class _LaunchListState extends State<LaunchList> {
 
   }
 
-  // select
+  // obtain all
   List<Launch> obtainResultsFromDb() {
 
     late List<LaunchHive>? launchHiveList = [];

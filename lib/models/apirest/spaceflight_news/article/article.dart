@@ -1,9 +1,6 @@
 
-import 'package:http/http.dart';
-
 class Article {
   final int id;
-  // late bool featured;
   final String title;
   final String url;
   final String imageUrl;

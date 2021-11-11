@@ -1,7 +1,5 @@
-
 import 'package:flutter_space_app/models/apirest/launch_library/event/event.dart';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
 class EventService {
@@ -10,6 +8,7 @@ class EventService {
   late List<Event> listEvent;
   late bool errorResponseBool = true;
 
+  // Obtain a list of events with get from url
   Future <List<Event>> fetchGetEventList(Client client, int _numResults) async {
     
     try{
@@ -32,9 +31,9 @@ class EventService {
     }
     
     return listEvent;
-    // return compute(parseEventsList, response);
   }
 
+  // converts the Json of the response to a list
   List<Event> parseEventsList(Response response){
     List<Event> _listEvent = [];
 
@@ -83,6 +82,7 @@ class EventService {
     return _listEvent;
   }
 
+  // method for obtain the response for show http errors on graphic interface
   Response obtainResponse() {
     return _resp;
   }

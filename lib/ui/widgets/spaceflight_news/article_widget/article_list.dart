@@ -15,7 +15,6 @@ class ArticlesList extends StatelessWidget {
       child: ListView.builder(
       itemCount: articlesL.length,
       itemBuilder: (context, index) {
-        // return Text(articlesL[index].title);
         return new ArticleCardItem(articlesL[index]);
       },
     ),
