@@ -41,7 +41,7 @@ I will change that in near future for don't send too many requests.
 
 That is the reason why I save the information of Launch Library on a database, but you can configure if you want save the data or show the http error instead of a list in your app.
 
-![img8](https://i.ibb.co/ysHnbHD/flutter-space-app-img8.jpg "img8" =350x)
+![img8](https://i.ibb.co/ysHnbHD/flutter-space-app-img8.jpg)
 
 ### Configuration parameters
 
@@ -63,7 +63,7 @@ bool hiveSaveDateBool = true;
 ```
 It shows a list of the last saved OK 200 result.
 
-![img9](https://i.ibb.co/ysHnbHD/flutter-space-app-img9.jpg "img9" =350x)
+![img9](https://i.ibb.co/ysHnbHD/flutter-space-app-img9.jpg)
 
 ```dart
 library flutter_space_app.globals;
@@ -77,7 +77,7 @@ bool hiveSaveDateBool = true;
 ```
 Save the last OK 200 result but shows the error instead of list.
 
-![img8](https://i.ibb.co/ysHnbHD/flutter-space-app-img8.jpg "img8" =350x)
+![img8](https://i.ibb.co/ysHnbHD/flutter-space-app-img8.jpg)
 
 ```dart
 library flutter_space_app.globals;
@@ -91,7 +91,7 @@ bool hiveSaveDateBool = false;
 ```
 Don't save the data and shows the http error.
 
-![img8](https://i.ibb.co/ysHnbHD/flutter-space-app-img8.jpg "img8" =350x)
+![img8](https://i.ibb.co/ysHnbHD/flutter-space-app-img8.jpg)
 
 ```dart
 library flutter_space_app.globals;
@@ -105,17 +105,17 @@ bool hiveSaveDateBool = false;
 ```
 Don't save the data and shows an empty list.
 
-![img12](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg "img12" =350x)
+![img12](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg)
 
 ### Debug Execute
 
 On visual studio code
 
-![imgDebugVS](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg "debug VS Code" =350x)
+![imgDebugVS](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg)
 
 On android studio
 
-![imgDebugAndroid](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg "debug Android Studio" =350x)
+![imgDebugAndroid](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg)
 
 ### Obtain a release
 
@@ -126,7 +126,7 @@ On android studio
 
 This it is an app that shows astronautics data, like spacecrafts, launches, space stations and more, the user only needs navigate through with buttons.
 
-|![img1](https://i.ibb.co/ysHnbHD/flutter-space-app-img1.jpg "img1" =150x)|![img2](https://i.ibb.co/ysHnbHD/flutter-space-app-img2.jpg "img2" =150x)|![img4](https://i.ibb.co/ysHnbHD/flutter-space-app-img4.jpg "img4" =150x)||![img10](https://i.ibb.co/ysHnbHD/flutter-space-app-img10.jpg "img10" =150x)|![img11](https://i.ibb.co/ysHnbHD/flutter-space-app-img11.jpg "img11" =150x)||
+|![img1](https://i.ibb.co/ysHnbHD/flutter-space-app-img1.jpg)|![img2](https://i.ibb.co/ysHnbHD/flutter-space-app-img2.jpg)|![img4](https://i.ibb.co/ysHnbHD/flutter-space-app-img4.jpg)||![img10](https://i.ibb.co/ysHnbHD/flutter-space-app-img10.jpg)|![img11](https://i.ibb.co/ysHnbHD/flutter-space-app-img11.jpg)||
 
 ## License
 
