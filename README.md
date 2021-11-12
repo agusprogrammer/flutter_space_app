@@ -41,9 +41,6 @@ I will change that in near future for don't send too many requests.
 
 That is the reason why I save the information of Launch Library on a database, but you can configure if you want save the data or show the http error instead of a list in your app.
 
-[comment]: <> ( github don't admit =x450 for image sizes )
-[comment]: <> ( ![img8](https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg =x450) )
-
 <img src="https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg" width="250">
 
 ### Configuration parameters
@@ -65,8 +62,6 @@ bool hiveShowHtmlErrorsBool = false;
 bool hiveSaveDateBool = true;
 ```
 It shows a list of the last saved OK 200 result.
-
-[comment]: <> ( ![img9](https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg =x450) )
 <img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="250">
 
 ```dart
@@ -80,8 +75,6 @@ bool hiveShowHtmlErrorsBool = true;
 bool hiveSaveDateBool = true;
 ```
 Save the last OK 200 result but shows the error instead of list.
-
-[comment]: <> ( ![img8](https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg =x450) )
 <img src="https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg" width="250">
 
 ```dart
@@ -95,8 +88,6 @@ bool hiveShowHtmlErrorsBool = true;
 bool hiveSaveDateBool = false;
 ```
 Don't save the data and shows the http error.
-
-[comment]: <> ( ![img8](https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg =x450) )
 <img src="https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg" width="250">
 
 ```dart
@@ -110,20 +101,14 @@ bool hiveShowHtmlErrorsBool = false;
 bool hiveSaveDateBool = false;
 ```
 Don't save the data and shows an empty list.
-
-[comment]: <> ( ![img12](https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg =x450) )
 <img src="https://i.ibb.co/ysHnbHD/flutter-space-app-img12.jpg" width="250">
 
 ### Debug Execute
 
 On visual studio code
-
-[comment]: <> ( ![imgDebugVS](https://i.ibb.co/jHZFtnp/debug-vs-code.png =300x150) )
 <img src="https://i.ibb.co/jHZFtnp/debug-vs-code.png" width="250">
 
 On android studio
-
-[comment]: <> ( ![imgDebugAndroid](https://i.ibb.co/TD3z94s/android-studio-debug.png =400x150) )
 <img src="https://i.ibb.co/TD3z94s/android-studio-debug.png" width="350">
 
 
@@ -136,8 +121,9 @@ On android studio
 
 This it is an app that shows astronautics data, like spacecrafts, launches, space stations and more, the user only needs navigate through with buttons.
 
-| <img src="https://i.ibb.co/1rNKSsC/flutter-space-app-img1.jpg" width="200"> | <img src="https://i.ibb.co/Cs09c4p/flutter-space-app-img4.jpg" width="200"> | <img src="https://i.ibb.co/k3WGL31/flutter-space-app-img2.jpg" width="200">
+| <img src="https://i.ibb.co/1rNKSsC/flutter-space-app-img1.jpg" width="200"> | <img src="https://i.ibb.co/Cs09c4p/flutter-space-app-img4.jpg" width="200"> | <img src="https://i.ibb.co/k3WGL31/flutter-space-app-img2.jpg" width="200"> 
 | <img src="https://i.ibb.co/Mc0kGSS/flutter-space-app-img10.jpg" width="200"> | <img src="https://i.ibb.co/LkfJwMC/flutter-space-app-img11.jpg" width="200"> | <img src="https://i.ibb.co/tc8JyzK/flutter-space-app-img3.jpg" width="200"> |
+
 
 ## License
 
