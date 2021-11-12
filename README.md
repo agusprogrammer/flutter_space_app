@@ -47,7 +47,7 @@ That is the reason why I save the information of Launch Library on a database, b
 
 <p>If we have http problems we can show a list saved instead of error.</p>
 
-<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="250">
+<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="150">
 
 ### Configuration parameters
 
@@ -68,7 +68,7 @@ bool hiveShowHtmlErrorsBool = false;
 bool hiveSaveDateBool = true;
 ```
 <p>It shows a list of the last saved OK 200 result.</p>
-<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="150">
+<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="250">
 
 ```dart
 library flutter_space_app.globals;
