@@ -35,13 +35,19 @@ to select if you want to watch the http errors on the screen or a list with resu
 These parameters are only applied for launch library UI parts, because Launch Library 2
 gives me the http error 429 too many requests.
 
+<p>error 429</p>
+
+<img src="https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg" width="150">
+
 This occurs because it is easy to exceed the limit of time when you send the requests.
 
 I will change that in near future for don't send too many requests.
 
 That is the reason why I save the information of Launch Library on a database, but you can configure if you want save the data or show the http error instead of a list in your app.
 
-<img src="https://i.ibb.co/3Sz10tT/flutter-space-app-img8.jpg" width="250">
+<p>If we have http problems we can show a list saved instead of error.</p>
+
+<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="250">
 
 ### Configuration parameters
 
