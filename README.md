@@ -68,7 +68,7 @@ bool hiveShowHtmlErrorsBool = false;
 bool hiveSaveDateBool = true;
 ```
 <p>It shows a list of the last saved OK 200 result.</p>
-<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="250">
+<img src="https://i.ibb.co/qRDmWjm/flutter-space-app-img9.jpg" width="150">
 
 ```dart
 library flutter_space_app.globals;
